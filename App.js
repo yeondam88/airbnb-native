@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { AppLoading } from 'expo';
-import { Text, Image } from 'react-native';
 import { Asset } from 'expo-asset';
+import { Ionicons } from '@expo/vector-icons';
+import * as Font from 'expo-font';
+import { Text, Image } from 'react-native';
 
 const cacheImages = (images) =>
   images.map((image) => {
-    console.log(image);
     if (typeof image === 'string') {
       return Image.prefetch(image);
     } else {
@@ -13,25 +14,28 @@ const cacheImages = (images) =>
     }
   });
 
+const cacheFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
+
 export default function App() {
   const [isReady, setIsReady] = useState(false);
-  const handleFinish = () => {
-    setIsReady(true);
-  };
+  const handleFinish = () => setIsReady(true);
   const loadAssets = async () => {
     const images = [
-      require('./assets/login-bg.jpeg'),
-      'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngguru.com%2Ffree-transparent-background-png-clipart-mucfk&psig=AOvVaw3YR_0ySMfG_GwU-iX0_FSz&ust=1593312292636000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOiNx_38oOoCFQAAAAAdAAAAABAD',
+      require('./assets/loginBg.jpeg'),
+      'http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo-219x286.png',
     ];
+    const fonts = [Ionicons.font];
+    const imagePromises = cacheImages(images);
+    const fontPromises = cacheFonts(fonts);
 
-    cacheImages(images);
+    return Promise.all([...fontPromises, ...imagePromises]);
   };
   return isReady ? (
     <Text>I'm ready</Text>
   ) : (
     <AppLoading
       onError={console.error}
-      handleFinish={handleFinish}
+      onFinish={handleFinish}
       startAsync={loadAssets}
     />
   );
