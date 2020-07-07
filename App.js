@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
-import { Ionicons } from '@expo/vector-icons';
 import * as Font from 'expo-font';
-import { Text, Image } from 'react-native';
+import React, { useState } from 'react';
+import { Image } from 'react-native';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import Gate from './components/Gate';
+import store, { persistor } from './redux/store';
 
 const cacheImages = (images) =>
   images.map((image) => {
@@ -31,7 +35,11 @@ export default function App() {
     return Promise.all([...fontPromises, ...imagePromises]);
   };
   return isReady ? (
-    <Text>I'm ready</Text>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Gate />
+      </PersistGate>
+    </Provider>
   ) : (
     <AppLoading
       onError={console.error}
