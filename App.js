@@ -36,7 +36,7 @@ export default function App() {
   };
   return isReady ? (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate persistor={persistor}>
         <Gate />
       </PersistGate>
     </Provider>
