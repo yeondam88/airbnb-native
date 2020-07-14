@@ -7,7 +7,7 @@ import DismissKeyboard from '../../components/DismissKeyboard';
 import { Logo } from '../../components/Shared';
 import config from '../../config';
 import { isEmail } from '../../utils';
-import { createAccount } from '../../api';
+import API from '../../api';
 
 const Container = styled.View`
   flex: 1;
@@ -47,7 +47,7 @@ export default ({ navigation: { navigate } }) => {
     if (!isFormValid()) return;
     setLoading(true);
     try {
-      const { status } = await createAccount({
+      const { status } = await API.createAccount({
         first_name: firstName,
         last_name: lastName,
         email,

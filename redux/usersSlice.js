@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import API from '../api';
 
 const userSlice = createSlice({
   name: 'users',
@@ -20,4 +21,19 @@ const userSlice = createSlice({
 });
 
 export const { logIn, logOut } = userSlice.actions;
+
+export const userLogin = (form) => async (dispatch) => {
+  try {
+    const {
+      data: { token },
+    } = await API.login(form);
+    if (token) {
+      console.log({ token });
+      dispatch(logIn({ token }));
+    }
+  } catch (error) {
+    alert('Wrong user or password');
+  }
+};
+
 export default userSlice.reducer;
