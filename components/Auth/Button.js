@@ -12,7 +12,7 @@ const ButtonComp = styled.View`
   align-items: center;
   border-radius: 30px;
   border: 1px solid ${(props) => (props.accent ? 'transparent' : colors.black)};
-  width: ${width / 2}px;
+  width: ${width / 1.5}px;
   background-color: ${(props) => (props.accent ? colors.red : 'transparent')};
 `;
 const Text = styled.Text`
@@ -32,7 +32,7 @@ const Button = ({ onPress, text, accent = false }) => (
 Button.propTypes = {
   onPress: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
-  accent: PropTypes.boolean,
+  accent: PropTypes.bool,
 };
 
 export default Button;
