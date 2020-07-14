@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Dimensions } from 'react-native';
+import { TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import colors from '../../colors';
@@ -21,10 +21,14 @@ const Text = styled.Text`
   font-size: 14px;
 `;
 
-const Button = ({ onPress, text, accent = false }) => (
-  <TouchableOpacity onPress={onPress}>
+const Button = ({ onPress, text, accent = false, loading }) => (
+  <TouchableOpacity onPress={loading ? null : onPress}>
     <ButtonComp accent={accent}>
-      <Text accent={accent}>{text}</Text>
+      {loading ? (
+        <ActivityIndicator color={accent ? 'white' : 'black'} />
+      ) : (
+        <Text accent={accent}>{text}</Text>
+      )}
     </ButtonComp>
   </TouchableOpacity>
 );
@@ -33,6 +37,7 @@ Button.propTypes = {
   onPress: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   accent: PropTypes.bool,
+  loading: PropTypes.bool,
 };
 
 export default Button;
