@@ -4,6 +4,8 @@ import Button from '../../components/Auth/Button';
 import Input from '../../components/Auth/Input';
 import { StatusBar, KeyboardAvoidingView, Keyboard } from 'react-native';
 import DismissKeyboard from '../../components/DismissKeyboard';
+import { Logo } from '../../components/Shared';
+import config from '../../config';
 
 const Container = styled.View`
   flex: 1;
@@ -12,6 +14,8 @@ const Container = styled.View`
 `;
 
 const InputContainer = styled.View`
+  justify-content: center;
+  align-items: center;
   margin-bottom: 30px;
 `;
 
@@ -19,13 +23,16 @@ export default () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const handleSubmit = () => alert(`${username}, ${password}`);
-  const dismissKeyboard = () => Keyboard.dismiss();
   return (
     <DismissKeyboard>
       <Container>
         <StatusBar barStyle="dark-content" />
         <KeyboardAvoidingView behavior="position">
           <InputContainer>
+            <Logo
+              source={{ uri: config.LOGO_URI }}
+              style={{ marginBottom: 20 }}
+            />
             <Input
               value={username}
               placeholder="Username"

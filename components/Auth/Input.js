@@ -13,6 +13,7 @@ const InputContainer = styled.TextInput`
   background-color: white;
   border-radius: 30px;
   margin-bottom: 10px;
+  font-weight: 500;
 `;
 
 const Input = ({
@@ -21,8 +22,10 @@ const Input = ({
   isPassword = false,
   autoCapitalize,
   stateFn,
+  keyboardType,
 }) => (
   <InputContainer
+    keyboardType={keyboardType}
     value={value}
     placeholder={placeholder}
     secureTextEntry={isPassword ? true : false}
@@ -37,6 +40,7 @@ Input.propTypes = {
   isPassword: PropTypes.bool,
   autoCapitalize: PropTypes.string,
   stateFn: PropTypes.func.isRequired,
+  keyboardType: PropTypes.string,
 };
 
 export default Input;

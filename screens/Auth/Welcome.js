@@ -3,9 +3,8 @@ import styled from 'styled-components/native';
 import { StatusBar } from 'react-native';
 import { BlurView } from 'expo-blur';
 import Button from '../../components/Auth/Button';
-
-const LOGO_URL =
-  'http://logok.org/wp-content/uploads/2014/07/airbnb-logo-belo-219x286.png';
+import config from '../../config';
+import { Logo } from '../../components/Shared';
 
 const Container = styled.View`
   flex: 1;
@@ -15,12 +14,6 @@ const Image = styled.Image`
   position: absolute;
   z-index: -1;
   top: 0;
-`;
-
-const Logo = styled.Image`
-  width: 100px;
-  height: 100px;
-  margin-top: 50px;
 `;
 
 const ButtonContainer = styled.View`
@@ -43,7 +36,7 @@ export default ({ navigation }) => {
           justifyContent: 'center',
         }}
       >
-        <Logo source={{ uri: LOGO_URL }} />
+        <Logo source={{ uri: config.LOGO_URI }} />
         <ButtonContainer>
           <Button onPress={goToSignUp} text="Sign Up" accent={true} />
           <Button onPress={goToSignIn} text="Sign In" />
