@@ -1,9 +1,8 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
+import { isAndroid } from '../utils';
 
-const isAndroid = Platform.OS === 'android';
 const Container = styled.View`
   padding-left: 20px;
 `;
