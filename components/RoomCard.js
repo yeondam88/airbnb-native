@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native';
+import Swiper from 'react-native-swiper';
+
+const { width, height } = Dimensions.get('screen');
 
 const Container = styled.View`
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
   align-items: flex-start;
 `;
 
@@ -40,11 +44,35 @@ const SuperHostText = styled.Text`
   font-size: 10px;
 `;
 
-const Text = styled.Text``;
+const PhotosContainer = styled.View`
+  overflow: hidden;
+  width: 100%;
+  height: ${height / 4}px;
+  margin-bottom: 10px;
+`;
+
+const SlideImage = styled.Image`
+  width: 100%;
+  height: 100%;
+`;
 
 const RoomCard = ({ id, isFav, isSuperHost, photos, name, price }) => {
   return (
     <Container>
+      <PhotosContainer>
+        {photos && photos.length === 0 ? (
+          <SlideImage
+            resizeMode="repeat"
+            source={'../assets/airbnb-native-room-default.jpg'}
+          />
+        ) : (
+          <Swiper>
+            {photos.map((photo) => (
+              <SlideImage key={photo.id} source={{ uri: photo.file }} />
+            ))}
+          </Swiper>
+        )}
+      </PhotosContainer>
       {isSuperHost ? (
         <Superhost>
           <SuperHostText>Superhost</SuperHostText>
@@ -67,7 +95,7 @@ RoomCard.propTypes = {
     PropTypes.shape({
       file: PropTypes.string,
     })
-  ).isRequired,
+  ),
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
 };

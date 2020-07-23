@@ -14,7 +14,6 @@ const roomsSlice = createSlice({
     setExploreRooms(state, action) {
       const { explore } = state;
       const { payload } = action;
-      console.log(payload);
       payload.rooms.forEach((payloadRoom) => {
         const exists = explore.rooms.find(
           (savedRoom) => savedRoom.id === payloadRoom.id
@@ -35,7 +34,6 @@ export const getRooms = () => async (dispatch) => {
     const {
       data: { results },
     } = await api.rooms();
-    console.log(results);
     dispatch(
       setExploreRooms({
         rooms: results,

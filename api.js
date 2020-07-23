@@ -6,7 +6,7 @@ const callAPI = async (method, path, data, jwt) => {
     'Content-Type': 'application/json',
   };
 
-  const baseURL = 'http://127.0.0.1:8000/api/v1';
+  const baseURL = 'http://localhost:8000/api/v1';
   const fullURL = `${baseURL}${path}`;
   if (method === 'get' || method === 'delete') {
     return axios[method](fullURL, { headers });
@@ -18,5 +18,7 @@ const callAPI = async (method, path, data, jwt) => {
 export default {
   createAccount: (form) => callAPI('post', '/users/', form),
   login: (form) => callAPI('post', '/users/token/', form),
-  rooms: (page = 1) => callAPI('get', `/rooms/?page=${page}`),
+  rooms: (page = 1) => {
+    return callAPI('get', `/rooms/?page=${page}`);
+  },
 };

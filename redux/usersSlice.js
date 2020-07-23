@@ -28,7 +28,6 @@ export const userLogin = (form) => async (dispatch) => {
       data: { token },
     } = await API.login(form);
     if (token) {
-      console.log({ token });
       dispatch(logIn({ token }));
     }
   } catch (error) {

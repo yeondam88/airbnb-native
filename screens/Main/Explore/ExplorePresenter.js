@@ -18,18 +18,21 @@ export default ({ rooms }) => {
         <ScrollView
           style={{ width: '100%', marginTop: 120 }}
           contentContainerStyle={{ paddingHorizontal: 15 }}
+          showsVerticalScrollIndicator={false}
         >
-          {rooms.map((room) => (
-            <RoomCard
-              key={room.id}
-              price={room.price}
-              name={room.name}
-              id={room.id}
-              isSuperHost={room.user.superhost}
-              isFav={room.is_fav}
-              photos={room.photos}
-            />
-          ))}
+          {rooms.map((room) => {
+            return (
+              <RoomCard
+                key={room.id}
+                price={room.price}
+                name={room.name}
+                id={room.id}
+                isSuperHost={room.user.superhost}
+                isFav={room.is_fav}
+                photos={room.photos}
+              />
+            );
+          })}
         </ScrollView>
       )}
     </Container>
