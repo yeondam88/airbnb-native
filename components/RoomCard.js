@@ -54,6 +54,7 @@ const PhotosContainer = styled.View`
 const SlideImage = styled.Image`
   width: 100%;
   height: 100%;
+  border-radius: 5px;
 `;
 
 const RoomCard = ({ id, isFav, isSuperHost, photos, name, price }) => {
@@ -66,7 +67,11 @@ const RoomCard = ({ id, isFav, isSuperHost, photos, name, price }) => {
             source={'../assets/airbnb-native-room-default.jpg'}
           />
         ) : (
-          <Swiper>
+          <Swiper
+            paginationStyle={{ marginBottom: -15 }}
+            activeDotColor={'white'}
+            dotColor={'rgba(200,200,200,0.8)'}
+          >
             {photos.map((photo) => (
               <SlideImage key={photo.id} source={{ uri: photo.file }} />
             ))}

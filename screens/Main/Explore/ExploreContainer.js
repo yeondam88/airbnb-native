@@ -10,9 +10,9 @@ const Container = styled.View`
 
 const Text = styled.Text``;
 
-export default ({ getRooms, rooms, page }) => {
+export default ({ getRooms, rooms, page, increasePage }) => {
   useEffect(() => {
-    getRooms();
-  }, []);
-  return <ExplorePresenter rooms={rooms} />;
+    getRooms(page);
+  }, [page]);
+  return <ExplorePresenter rooms={rooms} increasePage={increasePage} />;
 };
